@@ -38,12 +38,10 @@ $logo_path = 'images/logo.png'; // Update this path to your actual logo
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 1000;
+            /* Ensure navbar (and its children) render above the overlay */
+            z-index: 1004;
         }
-        .navbar.active {
-            opacity: 1;
-            visibility: visible;
-        }
+
 
 
 
@@ -132,7 +130,7 @@ $logo_path = 'images/logo.png'; // Update this path to your actual logo
             background: none;
             border: none;
             padding: 5px;
-            z-index: 1001;
+            z-index: 1005;
         }
 
         .hamburger span {
@@ -151,20 +149,31 @@ $logo_path = 'images/logo.png'; // Update this path to your actual logo
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
-            z-index: 998;
+            /* Sit above page content but below the mobile nav (which uses z-index: 1003) */
+            z-index: 1002;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+            pointer-events: none; /* ignore clicks when hidden */
         }
 
+        /* Make overlay visible and clickable when active */
         .overlay.active {
-            opacity: 1;
             visibility: visible;
+            opacity: 1;
+            transition-delay: 0s;
+            pointer-events: auto;
         }
+
+
 
         @media screen and (max-width: 768px) {
             .hamburger {
                 display: block;
+            }
+
+            .nav-logo{
+                margin-left: 0px;
             }
 
             .nav-menu {
@@ -173,19 +182,19 @@ $logo_path = 'images/logo.png'; // Update this path to your actual logo
                 right: -66.66%;
                 top: 0;
                 flex-direction: column;
-                background-color: white;
                 width: 66.66%;
                 height: 100vh;
                 text-align: left;
                 transition: 0.4s ease;
                 padding: 100px 30px 30px;
-                z-index: 999;
+                z-index: 1003;
                 box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
             }
 
             .nav-menu.active {
                 right: 0;
                 background-color: #dfecdf;
+                z-index: 1003;
             }
 
             .nav-item {
@@ -197,7 +206,6 @@ $logo_path = 'images/logo.png'; // Update this path to your actual logo
                 display: block;
                 text-align: left;
                 font-size: 18px;
-                border-bottom: 1px solid #f0f0f0;
                 color: black;
             }
 
@@ -207,7 +215,7 @@ $logo_path = 'images/logo.png'; // Update this path to your actual logo
 
             /* Center the login button in mobile view */
             .nav-item:last-child {
-                margin-top: 30px;
+                margin-top: 20px;
                 text-align: center;
             }
 
@@ -240,26 +248,6 @@ $logo_path = 'images/logo.png'; // Update this path to your actual logo
         p {
             margin-bottom: 15px;
             font-size: 1.1rem;
-        }
-
-        .instructions {
-            background: #e9f5ff;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 30px;
-        }
-
-        .instructions h2 {
-            color: #0056b3;
-            margin-bottom: 15px;
-        }
-
-        .instructions ol {
-            margin-left: 20px;
-        }
-
-        .instructions li {
-            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -305,17 +293,6 @@ $logo_path = 'images/logo.png'; // Update this path to your actual logo
     <!-- Overlay for mobile menu -->
     <div class="overlay" id="overlay"></div>
         
-        <div class="instructions">
-            <h2>How to Use</h2>
-            <ol>
-                <li>Resize your browser window to see the responsive behavior</li>
-                <li>On mobile view, click the hamburger icon to open the menu</li>
-                <li>Notice how the menu slides in from the right side</li>
-                <li>See how the login button is centered at the bottom</li>
-                <li>Click anywhere outside the menu or the hamburger icon to close it</li>
-            </ol>
-        </div>
-    </div>
 
     <script>
         // Mobile menu toggle functionality
