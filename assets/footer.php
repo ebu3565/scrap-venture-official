@@ -261,7 +261,7 @@
         <div class="footer-container">
             <!-- Section 1: Logo and Address -->
             <div class="footer-section">
-                <img src="images/logo.png" alt="Company Logo" class="footer-logo">
+                <img src="assets/images/logo.png" alt="Company Logo" class="footer-logo">
                 <p>We are committed to providing the best scrap management solutions for a sustainable future.</p>
                 
                 <div class="address-info">

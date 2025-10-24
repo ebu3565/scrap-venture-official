@@ -8,7 +8,7 @@ $nav_items = [
     'Login' => 'login.php'
 ];
 
-$logo_path = 'images/logo.png'; // Update this path to your actual logo
+$logo_path = 'assets/images/logo.png'; // Update this path to your actual logo
 ?>
 
 <!DOCTYPE html>
@@ -258,7 +258,7 @@ $logo_path = 'images/logo.png'; // Update this path to your actual logo
             <!-- Logo -->
             <div class="nav-logo">
                 <a href="#">
-                    <img src="images/logo.png" alt="Logo">
+                    <img src="assets/images/logo.png" alt="Logo">
                 </a>
             </div>
 

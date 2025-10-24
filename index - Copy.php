@@ -20,7 +20,7 @@
         }
 
         .hero-section {
-            background-color: #dfecdf;
+            background-color: #d1e0d1;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -200,101 +200,6 @@
                 max-width: 100%;
             }
         }
-
-
-
-
-/* How It Works Section */
-.how-it-works {
-    background-color: white;
-    padding: 3rem 2rem;
-}
-
-.works-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.works-title {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #111827;
-    margin-bottom: 3rem;
-}
-
-.steps-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-}
-
-.step-box {
-    flex: 1;
-    min-width: 280px;
-    max-width: 350px;
-    background-color: #dfecdf;
-    border-radius: 12px;
-    padding: 2rem;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.step-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-.step-image {
-    width: 100px;
-    height: 80px;
-    margin: 0 auto 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.step-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.step-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 1rem;
-}
-
-.step-description {
-    color: #4b5563;
-    line-height: 1.6;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .how-it-works {
-        padding: 3rem 1rem;
-    }
-    
-    .works-title {
-        font-size: 2rem;
-    }
-    
-    .steps-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .step-box {
-        max-width: 100%;
-    }
-}
-
-
     </style>
 </head>
 <body>
@@ -342,44 +247,6 @@
             </div>
         </div>
     </section>
-
-
- <!-- How It Works Section -->
-<section class="how-it-works">
-    <div class="works-container">
-        <h2 class="works-title">How It Works</h2>
-        <div class="steps-container">
-            <!-- Step 1 -->
-            <div class="step-box">
-                <div class="step-image">
-                    <img src="assets/images/schedule.svg" alt="Book a Pickup">
-                </div>
-                <h3 class="step-title">Book a Pickup</h3>
-                <p class="step-description">Submit your phone number and we'll call to confirm a convenient pickup time.</p>
-            </div>
-            
-            <!-- Step 2 -->
-            <div class="step-box">
-                <div class="step-image">
-                    <img src="assets/images/pickup.svg" alt="We Come to You">
-                </div>
-                <h3 class="step-title">We Come to You</h3>
-                <p class="step-description">Our team arrives at your address and collects the recyclables right from your doorstep.</p>
-            </div>
-            
-            <!-- Step 3 -->
-            <div class="step-box">
-                <div class="step-image">
-                    <img src="assets/images/payment.svg" alt="Get Paid Instantly">
-                </div>
-                <h3 class="step-title">Get Paid Instantly</h3>
-                <p class="step-description">Receive quick, fair payments for your scrap without any hassle.</p>
-            </div>
-        </div>
-    </div>
-</section>
-    
-
   <?php require 'assets/footer.php'; ?>
     <script>
         document.getElementById('pickupForm').addEventListener('submit', function(e) {
@@ -398,36 +265,6 @@
             // Reset the form
             document.getElementById('pickupForm').reset();
         });
-
-
-
-        // Optional: Add animations or interactions for the How It Works section
-document.addEventListener('DOMContentLoaded', function() {
-    const stepBoxes = document.querySelectorAll('.step-box');
-    
-    // Add intersection observer for scroll animations
-    const observerOptions = {
-        threshold: 0.2,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Apply initial styles and observe each step box
-    stepBoxes.forEach(box => {
-        box.style.opacity = '0';
-        box.style.transform = 'translateY(20px)';
-        box.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        observer.observe(box);
-    });
-});
     </script>
 </body>
 </html>
