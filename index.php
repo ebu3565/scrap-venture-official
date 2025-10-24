@@ -380,6 +380,50 @@
 </section>
     
 
+<!-- Why Choose Scrap Venture Section -->
+<section class="why-choose-us">
+    <div class="choose-container">
+        <h2 class="choose-title">Why Choose Scrap Venture?</h2>
+        <div class="benefits-container">
+            <!-- Benefit 1 -->
+            <div class="benefit-box">
+                <div class="benefit-image">
+                    <img src="assets/images/top-payouts.svg" alt="Top Payouts">
+                </div>
+                <h3 class="benefit-title">Top Payouts</h3>
+                <p class="benefit-description">Get the best price for your scrap, powered by our local recycling network.</p>
+            </div>
+            
+            <!-- Benefit 2 -->
+            <div class="benefit-box">
+                <div class="benefit-image">
+                    <img src="assets/images/easy-scheduling.svg" alt="Easy Scheduling">
+                </div>
+                <h3 class="benefit-title">Easy Scheduling</h3>
+                <p class="benefit-description">Book pickups at your preferred time — right from your mobile.</p>
+            </div>
+            
+            <!-- Benefit 3 -->
+            <div class="benefit-box">
+                <div class="benefit-image">
+                    <img src="assets/images/reliable-team.svg" alt="Reliable Team">
+                </div>
+                <h3 class="benefit-title">Reliable Team</h3>
+                <p class="benefit-description">Trusted staff trained to provide safe, smooth pickup services every time.</p>
+            </div>
+            
+            <!-- Benefit 4 -->
+            <div class="benefit-box">
+                <div class="benefit-image">
+                    <img src="assets/images/eco-commitment.svg" alt="Eco Commitment">
+                </div>
+                <h3 class="benefit-title">Eco Commitment</h3>
+                <p class="benefit-description">We recycle with care — ensuring your waste becomes sustainable value.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
   <?php require 'assets/footer.php'; ?>
     <script>
         document.getElementById('pickupForm').addEventListener('submit', function(e) {
