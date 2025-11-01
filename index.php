@@ -794,7 +794,7 @@
             <!-- Blog 3 -->
             <article class="blog-card">
                 <div class="blog-image">
-                    <img src="assets/images/green-bangladesh.jpg" alt="Green Bangladesh">
+                    <img src="assets/images/green home.jpg" alt="Green Bangladesh">
                     <div class="blog-category">Sustainability</div>
                 </div>
                 <div class="blog-content">
