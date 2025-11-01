@@ -622,6 +622,215 @@
     }
 }
 
+
+
+
+/* Testimonials Section */
+.testimonials-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 5rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.testimonials-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.testimonials-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #1a202c;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.testimonials-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: #269C26;
+    border-radius: 2px;
+}
+
+.testimonials-subtitle {
+    font-size: 1.1rem;
+    color: #64748b;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.testimonial-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border: 1px solid #f1f5f9;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    border-color: #269C26;
+}
+
+.testimonial-rating {
+    color: #fbbf24;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.testimonial-text {
+    color: #4b5563;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.testimonial-text::before {
+    content: '"';
+    position: absolute;
+    left: 0;
+    top: -10px;
+    font-size: 3rem;
+    color: #269C26;
+    opacity: 0.3;
+    font-family: Georgia, serif;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.author-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #dfecdf;
+}
+
+.author-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.author-info h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 0.25rem;
+}
+
+.author-info p {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.testimonials-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    padding-top: 2rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #269C26;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #64748b;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .testimonials-section {
+        padding: 3rem 1rem;
+    }
+    
+    .testimonials-title {
+        font-size: 2.2rem;
+    }
+    
+    .testimonials-subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .testimonial-card {
+        padding: 1.5rem;
+    }
+    
+    .testimonials-stats {
+        gap: 2rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonials-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .testimonial-author {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .author-info {
+        text-align: center;
+    }
+}
+
+
     </style>
 </head>
 <body>
@@ -746,6 +955,98 @@
                 </div>
                 <h3 class="benefit-title">Eco Commitment</h3>
                 <p class="benefit-description">We recycle with care — ensuring your waste becomes sustainable value.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="testimonials-container">
+        <div class="testimonials-header">
+            <h2 class="testimonials-title">What Our Customers Say</h2>
+            <p class="testimonials-subtitle">Join thousands of satisfied customers who have transformed their scrap into cash</p>
+        </div>
+        
+        <div class="testimonials-grid">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Scrap Venture made selling my old electronics so easy! They picked up from my home in Mirpur and paid me instantly. Highly recommended!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <img src="assets/images/user1.jpg" alt="Rahim Ahmed">
+                    </div>
+                    <div class="author-info">
+                        <h4 class="author-name">Rahim Ahmed</h4>
+                        <p class="author-location">Mirpur, Dhaka</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"As a small shop owner, I accumulate lots of cardboard and plastic waste. Scrap Venture gives me the best prices and regular pickups. Great service!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <img src="assets/images/user2.jpg" alt="Fatima Begum">
+                    </div>
+                    <div class="author-info">
+                        <h4 class="author-name">Fatima Begum</h4>
+                        <p class="author-location">Uttara, Dhaka</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="testimonial-text">"I was skeptical at first, but their team was professional and paid fairly for my metal scraps. Will definitely use again!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <img src="assets/images/user3.jpg" alt="Karim Hossain">
+                    </div>
+                    <div class="author-info">
+                        <h4 class="author-name">Karim Hossain</h4>
+                        <p class="author-location">Gulshan, Dhaka</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="testimonials-stats">
+            <div class="stat-item">
+                <div class="stat-number">10,000+</div>
+                <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4.8/5</div>
+                <div class="stat-label">Average Rating</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+ Tons</div>
+                <div class="stat-label">Recycled Monthly</div>
             </div>
         </div>
     </div>
@@ -923,6 +1224,45 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(card);
     });
 });
+
+
+// Testimonial animations
+document.addEventListener('DOMContentLoaded', function() {
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    const statItems = document.querySelectorAll('.stat-item');
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // Apply initial styles and observe each testimonial card
+    testimonialCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease';
+        observer.observe(card);
+    });
+    
+    // Apply initial styles and observe each stat item
+    statItems.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(item);
+    });
+});
+
+
     </script>
 </body>
 </html>
