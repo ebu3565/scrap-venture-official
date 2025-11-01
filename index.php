@@ -831,6 +831,288 @@
 }
 
 
+/* Households & Businesses Section */
+.audience-section {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    padding: 5rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.audience-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.audience-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.audience-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #1a202c;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.audience-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: #269C26;
+    border-radius: 2px;
+}
+
+.audience-subtitle {
+    font-size: 1.4rem;
+    color: #269C26;
+    font-weight: 700;
+    margin-top: 2rem;
+    letter-spacing: 1px;
+}
+
+.audience-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.audience-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    display: flex;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    border: 1px solid #f1f5f9;
+    min-height: 400px;
+}
+
+.audience-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.households-card:hover {
+    border-color: #3b82f6;
+}
+
+.businesses-card:hover {
+    border-color: #269C26;
+}
+
+.card-content {
+    flex: 1;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.households-card .card-icon {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+
+.businesses-card .card-icon {
+    background: rgba(38, 156, 38, 0.1);
+    color: #269C26;
+}
+
+.card-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #1a202c;
+}
+
+.households-card .card-title {
+    color: #3b82f6;
+}
+
+.businesses-card .card-title {
+    color: #269C26;
+}
+
+.card-features {
+    list-style: none;
+    margin-bottom: 0;
+    flex-grow: 1;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+    padding: 0.5rem 0;
+}
+
+.feature-item i {
+    margin-right: 1rem;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.households-card .feature-item i {
+    color: #3b82f6;
+}
+
+.businesses-card .feature-item i {
+    color: #269C26;
+}
+
+.feature-item span {
+    color: #4b5563;
+    line-height: 1.6;
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+
+.card-image {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+}
+
+.audience-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.audience-card:hover .audience-image {
+    transform: scale(1.05);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 100%);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.audience-card:hover .image-overlay {
+    opacity: 0.4;
+}
+
+.households-card .card-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 50%);
+    z-index: 1;
+}
+
+.businesses-card .card-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(38, 156, 38, 0.1) 0%, rgba(38, 156, 38, 0) 50%);
+    z-index: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .audience-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .audience-card {
+        flex-direction: column;
+        min-height: auto;
+    }
+    
+    .card-image {
+        min-height: 250px;
+        order: -1;
+    }
+    
+    .card-content {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .audience-section {
+        padding: 3rem 1rem;
+    }
+    
+    .audience-title {
+        font-size: 2.2rem;
+    }
+    
+    .audience-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .card-content {
+        padding: 1.5rem;
+    }
+    
+    .card-title {
+        font-size: 1.6rem;
+    }
+    
+    .feature-item span {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .audience-title {
+        font-size: 1.8rem;
+    }
+    
+    .card-content {
+        padding: 1.5rem;
+    }
+    
+    .card-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .card-image {
+        min-height: 200px;
+    }
+}
+
+
     </style>
 </head>
 <body>
@@ -961,6 +1243,74 @@
 </section>
 
 
+<!-- Households & Businesses Section -->
+<section class="audience-section">
+    <div class="audience-container">
+        <div class="audience-header">
+            <h2 class="audience-title">Households & Businesses Have Different Needs</h2>
+            <p class="audience-subtitle">— We Serve Both!</p>
+        </div>
+        
+        <div class="audience-grid">
+            <!-- Households Card -->
+            <div class="audience-card households-card">
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="card-title">For Households</h3>
+                    <ul class="card-features">
+                        <li class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Flexible On-Demand Pickup at Your Door</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Digital Weighing & Instant Confirmation</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Safe & Verified Pickup Team</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-image">
+                    <img src="assets/images/household-recycle.webp" alt="Household Recycling" class="audience-image">
+                    <div class="image-overlay"></div>
+                </div>
+            </div>
+            
+            <!-- Businesses Card -->
+            <div class="audience-card businesses-card">
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="card-title">For Businesses</h3>
+                    <ul class="card-features">
+                        <li class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Proper Billing & Documentation</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Monthly Recycling Reports</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Competitive Corporate Scrap Pricing</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-image">
+                    <img src="assets/images/business-recycle.webp" alt="Business Recycling" class="audience-image">
+                    <div class="image-overlay"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
 
 <!-- Testimonials Section -->
 <section class="testimonials-section">
@@ -1262,6 +1612,42 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+// Animation for the audience section
+document.addEventListener('DOMContentLoaded', function() {
+    const audienceCards = document.querySelectorAll('.audience-card');
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // Apply initial styles and observe each card
+    audienceCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease';
+        observer.observe(card);
+    });
+    
+    // Add image fallback in case images don't load
+    const images = document.querySelectorAll('.audience-image');
+    images.forEach(img => {
+        img.addEventListener('error', function() {
+            this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2Y4ZmFmYyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM2NDc0OGIiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';
+            console.log('Image failed to load: ' + this.alt);
+        });
+    });
+});
 
     </script>
 </body>
