@@ -1112,7 +1112,415 @@
     }
 }
 
+/* Multi-step Form Styles */
+.form-step {
+    display: none;
+}
 
+.form-step.active {
+    display: block;
+}
+
+.form-navigation {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.back-btn {
+    background-color: #6b7280;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex: 1;
+}
+
+.back-btn:hover {
+    background-color: #4b5563;
+}
+
+.confirm-btn {
+    background-color: #059669;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex: 1;
+}
+
+.confirm-btn:hover {
+    background-color: #047857;
+}
+
+/* Material Options */
+.material-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.material-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.material-option:hover {
+    border-color: #269C26;
+    background-color: #f0f9f0;
+}
+
+.material-option.selected {
+    border-color: #269C26;
+    background-color: #dfecdf;
+}
+
+.material-option i {
+    font-size: 1.25rem;
+    color: #269C26;
+    width: 24px;
+}
+
+.material-option span {
+    font-weight: 600;
+    color: #374151;
+}
+
+/* Weight Input */
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #269C26;
+}
+
+/* Photo Options */
+.photo-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.photo-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.photo-btn:hover {
+    border-color: #269C26;
+    background-color: #f0f9f0;
+}
+
+.photo-btn.cancel {
+    color: #ef4444;
+}
+
+.photo-btn.cancel:hover {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+.photo-btn i {
+    font-size: 1.1rem;
+    width: 20px;
+}
+
+.photo-preview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.photo-preview-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #e5e7eb;
+}
+
+.photo-preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.remove-photo {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+/* Progress Indicator */
+.form-progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.form-progress::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e5e7eb;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.progress-step {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #9ca3af;
+    position: relative;
+    z-index: 2;
+}
+
+.progress-step.active {
+    border-color: #269C26;
+    background: #269C26;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .material-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .photo-options {
+        gap: 0.5rem;
+    }
+    
+    .photo-btn {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .form-navigation {
+        flex-direction: column;
+    }
+}
+
+/* Date and Time Inputs */
+.form-input[type="date"],
+.form-input[type="time"],
+.form-input[type="datetime-local"] {
+    padding: 0.75rem 1rem;
+}
+
+.form-input[type="date"]:invalid,
+.form-input[type="time"]:invalid {
+    color: #9ca3af;
+}
+
+/* Location Section */
+.location-section {
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+    background: #f9fafb;
+}
+
+.location-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: #269C26;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    width: 100%;
+    justify-content: center;
+}
+
+.location-btn:hover {
+    background-color: #1e7a1e;
+}
+
+.location-btn:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.location-btn i {
+    font-size: 1.1rem;
+}
+
+.location-status {
+    margin-top: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.9rem;
+    background: white;
+    border: 1px solid #e5e7eb;
+}
+
+.location-status.loading {
+    background: #fef3c7;
+    border-color: #f59e0b;
+    color: #92400e;
+}
+
+.location-status.success {
+    background: #d1fae5;
+    border-color: #10b981;
+    color: #065f46;
+}
+
+.location-status.error {
+    background: #fee2e2;
+    border-color: #ef4444;
+    color: #991b1b;
+}
+
+.manual-location textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Order Summary */
+.order-summary {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.order-summary h4 {
+    margin-bottom: 1rem;
+    color: #1f2937;
+    font-size: 1.1rem;
+    border-bottom: 2px solid #269C26;
+    padding-bottom: 0.5rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0;
+}
+
+.summary-item span:first-child {
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.summary-item span:last-child {
+    color: #1f2937;
+    font-weight: 500;
+}
+
+.confirm-order-btn {
+    background-color: #059669;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex: 1;
+}
+
+.confirm-order-btn:hover {
+    background-color: #047857;
+}
+
+.confirm-order-btn:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+/* Time Slot Select */
+.form-input[type="time"],
+.form-input select {
+    cursor: pointer;
+}
+
+/* Loading Animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+/* Success Animation */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-10px);}
+    60% {transform: translateY(-5px);}
+}
+
+.success-bounce {
+    animation: bounce 1s;
+}
     </style>
 </head>
 <body>
@@ -1139,25 +1547,153 @@
                 </div>
             </div>
             
-            <div class="pickup-section">
-                <h2 class="section-title">Schedule a Pickup</h2>
-                
-                <form id="pickupForm">
-                    <div class="form-group">
-                        <label class="form-label" for="mobile">Mobile Number</label>
-                        <div class="phone-input">
-                            <div class="country-code">+880</div>
-                            <input type="tel" id="mobile" class="phone-field" placeholder="1XXXXXXXXX" pattern="[0-9]{10}" required>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="next-btn">Next</button>
-                </form>
-                
-                <div class="help-text">
-                    Facing problems? Call us at <a href="tel:+8801234567890">+8801234567890</a>
+           <div class="pickup-section">
+    <h2 class="section-title">Schedule a Pickup</h2>
+    
+    <form id="pickupForm">
+        <!-- Step 1: Phone Number -->
+        <div class="form-step active" id="step1">
+            <div class="form-group">
+                <label class="form-label" for="mobile">Mobile Number</label>
+                <div class="phone-input">
+                    <div class="country-code">+880</div>
+                    <input type="tel" id="mobile" class="phone-field" placeholder="1XXXXXXXXX" pattern="[0-9]{10}" required>
                 </div>
             </div>
+            <button type="button" class="next-btn" onclick="showStep(2)">Next</button>
+        </div>
+
+        <!-- Step 2: Material Selection -->
+        <div class="form-step" id="step2">
+            <div class="form-group">
+                <label class="form-label">Choose Material Type</label>
+                <div class="material-options">
+                    <div class="material-option" onclick="selectMaterial('plastic')">
+                        <i class="fas fa-bottle-water"></i>
+                        <span>Plastic</span>
+                    </div>
+                    <div class="material-option" onclick="selectMaterial('glass')">
+                        <i class="fas fa-wine-glass"></i>
+                        <span>Glass</span>
+                    </div>
+                    <div class="material-option" onclick="selectMaterial('metal')">
+                        <i class="fas fa-cogs"></i>
+                        <span>Metal</span>
+                    </div>
+                    <div class="material-option" onclick="selectMaterial('paper')">
+                        <i class="fas fa-file"></i>
+                        <span>Paper</span>
+                    </div>
+                </div>
+                <input type="hidden" id="selectedMaterial" required>
+            </div>
+            <div class="form-navigation">
+                <button type="button" class="back-btn" onclick="showStep(1)">Back</button>
+                <button type="button" class="next-btn" onclick="showStep(3)">Next</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Weight & Photos -->
+        <div class="form-step" id="step3">
+            <div class="form-group">
+                <label class="form-label" for="weight">Estimated Weight (kg)</label>
+                <input type="number" id="weight" class="form-input" placeholder="Enter weight in kg" min="0.1" step="0.1" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Add Photos</label>
+                <div class="photo-options">
+                    <button type="button" class="photo-btn" onclick="takePicture()">
+                        <i class="fas fa-camera"></i>
+                        Take Picture
+                    </button>
+                    <button type="button" class="photo-btn" onclick="chooseFromGallery()">
+                        <i class="fas fa-images"></i>
+                        Choose from Gallery
+                    </button>
+                    <button type="button" class="photo-btn cancel" onclick="cancelPhotos()">
+                        <i class="fas fa-times"></i>
+                        Cancel
+                    </button>
+                </div>
+                <div id="photoPreview" class="photo-preview"></div>
+            </div>
+            
+            <div class="form-navigation">
+                <button type="button" class="back-btn" onclick="showStep(2)">Back</button>
+               <button type="button" class="confirm-btn" onclick="showStep(4)">Confirm Pickup</button>
+            </div>
+        </div>
+
+        <!-- Step 4: Date, Time & Location -->
+<div class="form-step" id="step4">
+    <div class="form-group">
+        <label class="form-label" for="pickupDate">Pickup Date</label>
+        <input type="date" id="pickupDate" class="form-input" min="<?php echo date('Y-m-d'); ?>" required>
+    </div>
+    
+    <div class="form-group">
+        <label class="form-label" for="pickupTime">Pickup Time</label>
+        <select id="pickupTime" class="form-input" required>
+            <option value="">Select a time slot</option>
+            <option value="09:00-11:00">09:00 AM - 11:00 AM</option>
+            <option value="11:00-13:00">11:00 AM - 01:00 PM</option>
+            <option value="13:00-15:00">01:00 PM - 03:00 PM</option>
+            <option value="15:00-17:00">03:00 PM - 05:00 PM</option>
+            <option value="17:00-19:00">05:00 PM - 07:00 PM</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label class="form-label">Pickup Location</label>
+        <div class="location-section">
+            <button type="button" class="location-btn" onclick="getCurrentLocation()">
+                <i class="fas fa-location-crosshairs"></i>
+                Use Current Location
+            </button>
+            <div id="locationStatus" class="location-status">Location not selected</div>
+            <input type="hidden" id="userLatitude">
+            <input type="hidden" id="userLongitude">
+            <input type="hidden" id="userAddress">
+        </div>
+        
+        <div class="manual-location" style="margin-top: 1rem;">
+            <label class="form-label" for="manualAddress">Or Enter Address Manually</label>
+            <textarea id="manualAddress" class="form-input" placeholder="Enter your complete address..." rows="3"></textarea>
+        </div>
+    </div>
+    
+    <div class="order-summary">
+        <h4>Order Summary</h4>
+        <div class="summary-item">
+            <span>Material:</span>
+            <span id="summaryMaterial">-</span>
+        </div>
+        <div class="summary-item">
+            <span>Weight:</span>
+            <span id="summaryWeight">-</span>
+        </div>
+        <div class="summary-item">
+            <span>Photos:</span>
+            <span id="summaryPhotos">0</span>
+        </div>
+    </div>
+    
+    <div class="form-navigation">
+        <button type="button" class="back-btn" onclick="showStep(3)">Back</button>
+        <button type="button" class="confirm-order-btn" onclick="confirmOrder()">Confirm Order</button>
+    </div>
+</div>
+    </form>
+    
+    <div class="help-text">
+        Facing problems? Call us at <a href="tel:+8801234567890">+8801234567890</a>
+    </div>
+</div>
+
+
+
+            
         </div>
     </section>
 
@@ -1470,32 +2006,360 @@
 
   <?php require 'assets/footer.php'; ?>
     <script>
-        document.getElementById('pickupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const phoneNumber = document.getElementById('mobile').value;
+let selectedMaterial = '';
+let photos = [];
+
+// Form step navigation
+function showStep(stepNumber) {
+    console.log('Moving to step:', stepNumber);
+    
+    // Hide all steps
+    document.querySelectorAll('.form-step').forEach(step => {
+        step.classList.remove('active');
+    });
+    
+    // Show selected step
+    document.getElementById(`step${stepNumber}`).classList.add('active');
+    
+    // Update progress indicator
+    updateProgress(stepNumber);
+    
+    // If going to step 4, update order summary
+    if (stepNumber === 4) {
+        updateOrderSummary();
+        
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('pickupDate').min = today;
+        
+        // Set default date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById('pickupDate').value = tomorrow.toISOString().split('T')[0];
+    }
+}
+
+function updateProgress(currentStep) {
+    const progressSteps = document.querySelectorAll('.progress-step');
+    if (progressSteps.length > 0) {
+        progressSteps.forEach((step, index) => {
+            if (index + 1 <= currentStep) {
+                step.classList.add('active');
+            } else {
+                step.classList.remove('active');
+            }
+        });
+    }
+}
+
+// Material selection
+function selectMaterial(material) {
+    selectedMaterial = material;
+    document.getElementById('selectedMaterial').value = material;
+    
+    // Update UI
+    document.querySelectorAll('.material-option').forEach(option => {
+        option.classList.remove('selected');
+    });
+    event.currentTarget.classList.add('selected');
+}
+
+// Photo handling functions
+function takePicture() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.capture = 'environment';
+    input.onchange = (e) => handlePhotoSelection(e);
+    input.click();
+}
+
+function chooseFromGallery() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.multiple = true;
+    input.onchange = (e) => handlePhotoSelection(e);
+    input.click();
+}
+
+function cancelPhotos() {
+    photos = [];
+    updatePhotoPreview();
+}
+
+function handlePhotoSelection(event) {
+    const files = event.target.files;
+    if (files) {
+        Array.from(files).forEach(file => {
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    photos.push(e.target.result);
+                    updatePhotoPreview();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+}
+
+function removePhoto(index) {
+    photos.splice(index, 1);
+    updatePhotoPreview();
+}
+
+function updatePhotoPreview() {
+    const preview = document.getElementById('photoPreview');
+    preview.innerHTML = '';
+    
+    photos.forEach((photo, index) => {
+        const item = document.createElement('div');
+        item.className = 'photo-preview-item';
+        item.innerHTML = `
+            <img src="${photo}" alt="Preview ${index + 1}">
+            <button type="button" class="remove-photo" onclick="removePhoto(${index})">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        preview.appendChild(item);
+    });
+}
+
+// Location Services
+function getCurrentLocation() {
+    const locationBtn = document.querySelector('.location-btn');
+    const locationStatus = document.getElementById('locationStatus');
+    
+    // Show loading state
+    locationBtn.disabled = true;
+    locationBtn.innerHTML = '<i class="fas fa-spinner loading-spinner"></i> Getting Location...';
+    locationStatus.className = 'location-status loading';
+    locationStatus.textContent = 'Getting your location...';
+    
+    if (!navigator.geolocation) {
+        locationStatus.className = 'location-status error';
+        locationStatus.textContent = 'Geolocation is not supported by your browser';
+        locationBtn.disabled = false;
+        locationBtn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Use Current Location';
+        return;
+    }
+    
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
             
-            // Basic validation for Bangladeshi mobile numbers
-            if (!/^1[0-9]{9}$/.test(phoneNumber)) {
-                alert('Please enter a valid 10-digit Bangladeshi mobile number (without country code).');
-                return;
+            document.getElementById('userLatitude').value = lat;
+            document.getElementById('userLongitude').value = lng;
+            
+            getAddressFromCoordinates(lat, lng);
+        },
+        function(error) {
+            locationBtn.disabled = false;
+            locationBtn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Use Current Location';
+            
+            let errorMessage = 'Unable to get your location. ';
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    errorMessage += 'Please allow location access and try again.';
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    errorMessage += 'Location information is unavailable.';
+                    break;
+                case error.TIMEOUT:
+                    errorMessage += 'Location request timed out.';
+                    break;
+                default:
+                    errorMessage += 'An unknown error occurred.';
+                    break;
             }
             
-            // In a real application, you would send this data to a server
-            alert(`Thank you! We'll contact you at +880${phoneNumber} to schedule your pickup.`);
-            
-            // Reset the form
-            document.getElementById('pickupForm').reset();
-        });
+            locationStatus.className = 'location-status error';
+            locationStatus.textContent = errorMessage;
+        },
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 60000
+        }
+    );
+}
 
-
-
-        // Optional: Add animations or interactions for the How It Works section
-document.addEventListener('DOMContentLoaded', function() {
-    const stepBoxes = document.querySelectorAll('.step-box');
+function getAddressFromCoordinates(lat, lng) {
+    const locationStatus = document.getElementById('locationStatus');
     
-    // Add intersection observer for scroll animations
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`)
+        .then(response => response.json())
+        .then(data => {
+            const address = data.display_name;
+            document.getElementById('userAddress').value = address;
+            document.getElementById('manualAddress').value = address;
+            
+            locationStatus.className = 'location-status success';
+            locationStatus.textContent = `Location found: ${data.address?.road || data.address?.suburb || 'Your location'}`;
+            
+            const locationBtn = document.querySelector('.location-btn');
+            locationBtn.disabled = false;
+            locationBtn.innerHTML = '<i class="fas fa-check"></i> Location Updated';
+            
+            setTimeout(() => {
+                locationBtn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Use Current Location';
+            }, 3000);
+        })
+        .catch(error => {
+            console.error('Geocoding error:', error);
+            locationStatus.className = 'location-status success';
+            locationStatus.textContent = 'Location coordinates saved (unable to get address)';
+            
+            const locationBtn = document.querySelector('.location-btn');
+            locationBtn.disabled = false;
+            locationBtn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Use Current Location';
+        });
+}
+
+// Update Order Summary
+function updateOrderSummary() {
+    document.getElementById('summaryMaterial').textContent = 
+        document.getElementById('selectedMaterial').value || '-';
+    document.getElementById('summaryWeight').textContent = 
+        document.getElementById('weight').value ? document.getElementById('weight').value + ' kg' : '-';
+    document.getElementById('summaryPhotos').textContent = photos.length;
+}
+
+// Final Order Confirmation
+function confirmOrder() {
+    const pickupDate = document.getElementById('pickupDate').value;
+    const pickupTime = document.getElementById('pickupTime').value;
+    const manualAddress = document.getElementById('manualAddress').value;
+    const userLatitude = document.getElementById('userLatitude').value;
+    const userLongitude = document.getElementById('userLongitude').value;
+    
+    // Validation
+    if (!pickupDate) {
+        alert('Please select a pickup date.');
+        return;
+    }
+    
+    if (!pickupTime) {
+        alert('Please select a pickup time slot.');
+        return;
+    }
+    
+    if (!manualAddress && (!userLatitude || !userLongitude)) {
+        alert('Please provide your pickup location or use current location.');
+        return;
+    }
+    
+    // Get all form data
+    const formData = {
+        phone: `+880${document.getElementById('mobile').value}`,
+        material: document.getElementById('selectedMaterial').value,
+        weight: document.getElementById('weight').value,
+        photos: photos.length,
+        date: pickupDate,
+        time: pickupTime,
+        address: manualAddress || document.getElementById('userAddress').value,
+        coordinates: userLatitude && userLongitude ? {
+            lat: userLatitude,
+            lng: userLongitude
+        } : null
+    };
+    
+    // Show confirmation with all details
+    const confirmationMessage = `🎉 Order Confirmed Successfully!
+
+📋 Order Details:
+• Material: ${formData.material}
+• Weight: ${formData.weight} kg
+• Photos: ${formData.photos}
+
+📅 Pickup Schedule:
+• Date: ${new Date(formData.date).toLocaleDateString()}
+• Time: ${formData.time}
+
+📍 Pickup Location:
+${formData.address}
+
+We'll contact you at ${formData.phone} before pickup.
+
+Thank you for choosing Scrap Venture! ♻️`;
+    
+    alert(confirmationMessage);
+    
+    console.log('Order confirmed:', formData);
+    
+    // Reset form and show success message
+    resetForm();
+    showSuccessAnimation();
+}
+
+function showSuccessAnimation() {
+    const pickupSection = document.querySelector('.pickup-section');
+    pickupSection.innerHTML = `
+        <div class="success-animation" style="text-align: center; padding: 3rem 2rem;">
+            <div style="font-size: 4rem; color: #269C26; margin-bottom: 1rem;">✅</div>
+            <h2 style="color: #065f46; margin-bottom: 1rem;">Order Confirmed!</h2>
+            <p style="color: #4b5563; margin-bottom: 2rem;">We've received your pickup request and will contact you shortly.</p>
+            <button onclick="location.reload()" class="next-btn" style="background: #269C26;">
+                Schedule Another Pickup
+            </button>
+        </div>
+    `;
+}
+
+function resetForm() {
+    document.getElementById('pickupForm').reset();
+    photos = [];
+    selectedMaterial = '';
+    updatePhotoPreview();
+    document.querySelectorAll('.material-option').forEach(option => {
+        option.classList.remove('selected');
+    });
+    document.getElementById('locationStatus').className = 'location-status';
+    document.getElementById('locationStatus').textContent = 'Location not selected';
+    const locationBtn = document.querySelector('.location-btn');
+    locationBtn.disabled = false;
+    locationBtn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Use Current Location';
+    showStep(1);
+}
+
+// Initialize everything when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page loaded - initializing form');
+    
+    // Add progress indicator
+    const pickupSection = document.querySelector('.pickup-section');
+    const sectionTitle = pickupSection.querySelector('.section-title');
+    
+    if (!pickupSection.querySelector('.form-progress')) {
+        const progressHTML = `
+            <div class="form-progress">
+                <div class="progress-step active">1</div>
+                <div class="progress-step">2</div>
+                <div class="progress-step">3</div>
+                <div class="progress-step">4</div>
+            </div>
+        `;
+        sectionTitle.insertAdjacentHTML('afterend', progressHTML);
+    }
+    
+    // Remove the old form submission handler that was causing issues
+    const form = document.getElementById('pickupForm');
+    form.onsubmit = function(e) {
+        e.preventDefault();
+        console.log('Form submission prevented - using step navigation instead');
+        return false;
+    };
+    
+    // Add animations
+    initializeAnimations();
+});
+
+// Animation functions
+function initializeAnimations() {
     const observerOptions = {
-        threshold: 0.2,
+        threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
     
@@ -1508,94 +2372,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
     
-    // Apply initial styles and observe each step box
+    // Animate step boxes
+    const stepBoxes = document.querySelectorAll('.step-box');
     stepBoxes.forEach(box => {
         box.style.opacity = '0';
         box.style.transform = 'translateY(20px)';
         box.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
         observer.observe(box);
     });
-});
-
-// Optional: Add animations for the Why Choose Us section
-document.addEventListener('DOMContentLoaded', function() {
+    
+    // Animate benefit boxes
     const benefitBoxes = document.querySelectorAll('.benefit-box');
-    
-    // Add intersection observer for scroll animations
-    const observerOptions = {
-        threshold: 0.2,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Apply initial styles and observe each benefit box
     benefitBoxes.forEach(box => {
         box.style.opacity = '0';
         box.style.transform = 'translateY(20px)';
         box.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
         observer.observe(box);
     });
-});
-
-
-
-
-// Blog section animations
-document.addEventListener('DOMContentLoaded', function() {
+    
+    // Animate blog cards
     const blogCards = document.querySelectorAll('.blog-card');
-    
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Apply initial styles and observe each blog card
     blogCards.forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease';
         observer.observe(card);
     });
-});
-
-
-// Testimonial animations
-document.addEventListener('DOMContentLoaded', function() {
+    
+    // Animate testimonials
     const testimonialCards = document.querySelectorAll('.testimonial-card');
     const statItems = document.querySelectorAll('.stat-item');
     
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Apply initial styles and observe each testimonial card
     testimonialCards.forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
@@ -1603,35 +2410,15 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(card);
     });
     
-    // Apply initial styles and observe each stat item
     statItems.forEach(item => {
         item.style.opacity = '0';
         item.style.transform = 'translateY(20px)';
         item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(item);
     });
-});
-
-
-// Animation for the audience section
-document.addEventListener('DOMContentLoaded', function() {
+    
+    // Animate audience cards
     const audienceCards = document.querySelectorAll('.audience-card');
-    
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Apply initial styles and observe each card
     audienceCards.forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
@@ -1639,16 +2426,13 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(card);
     });
     
-    // Add image fallback in case images don't load
+    // Image fallback
     const images = document.querySelectorAll('.audience-image');
     images.forEach(img => {
         img.addEventListener('error', function() {
             this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2Y4ZmFmYyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM2NDc0OGIiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';
-            console.log('Image failed to load: ' + this.alt);
         });
     });
-});
+}
 
-    </script>
-</body>
-</html>
+</script>
