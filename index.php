@@ -2309,18 +2309,56 @@ function confirmOrder() {
     const formData = {
         phone: `+880${document.getElementById('mobile').value}`,
         material: document.getElementById('selectedMaterial').value,
-        weight: document.getElementById('weight').value,
+        weight: parseFloat(document.getElementById('weight').value),
         photos: photos.length,
         date: pickupDate,
         time: pickupTime,
         address: manualAddress || document.getElementById('userAddress').value,
-        coordinates: userLatitude && userLongitude ? {
-            lat: userLatitude,
-            lng: userLongitude
-        } : null
+        coordinates: {
+            lat: userLatitude ? parseFloat(userLatitude) : null,
+            lng: userLongitude ? parseFloat(userLongitude) : null
+        }
     };
     
-    console.log('Order confirmed:', formData);
+    console.log('Sending data to server:', formData);
+    
+    // Send data to PHP backend
+    submitPickupRequest(formData);
+}
+
+// Function to submit data to PHP backend
+function submitPickupRequest(formData) {
+    // Show loading state
+    const confirmBtn = document.querySelector('.confirm-order-btn');
+    const originalText = confirmBtn.innerHTML;
+    confirmBtn.innerHTML = '<i class="fas fa-spinner loading-spinner"></i> Submitting...';
+    confirmBtn.disabled = true;
+    
+    fetch('process_pickup.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Server response:', data);
+            // Show success animation with server data
+            showSuccessAnimation(formData, data.request_id);
+        } else {
+            throw new Error(data.message || 'Failed to submit request');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showValidationError('Failed to submit pickup request. Please try again. Error: ' + error.message);
+        
+        // Reset button
+        confirmBtn.innerHTML = originalText;
+        confirmBtn.disabled = false;
+    });
     
     // Show success animation directly (no alert)
     showSuccessAnimation(formData);
@@ -2350,7 +2388,7 @@ function showValidationError(message) {
     }, 3000);
 }
 
-function showSuccessAnimation(formData) {
+function showSuccessAnimation(formData, requestId = null) {
     const pickupSection = document.querySelector('.pickup-section');
     
     // Format the date for display
@@ -2369,10 +2407,26 @@ function showSuccessAnimation(formData) {
         hour12: true
     });
     
+    let requestInfo = '';
+    if (requestId) {
+        requestInfo = `
+            <div style="background: #dbeafe; border-radius: 8px; padding: 1rem; margin: 1rem 0; border: 2px solid #3b82f6;">
+                <div style="font-weight: 600; color: #1e40af; margin-bottom: 0.5rem;">
+                    <i class="fas fa-ticket-alt"></i> Request ID: #${requestId}
+                </div>
+                <div style="font-size: 0.9rem; color: #374151;">
+                    Use this ID for any inquiries
+                </div>
+            </div>
+        `;
+    }
+    
     pickupSection.innerHTML = `
         <div class="success-animation" style="text-align: center; padding: 2rem;">
             <div style="font-size: 4rem; color: #269C26; margin-bottom: 1rem;">✅</div>
             <h2 style="color: #065f46; margin-bottom: 1.5rem; font-size: 2rem;">Order Confirmed!</h2>
+            
+            ${requestInfo}
             
             <div style="background: #f0f9f0; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; border: 2px solid #dcfce7;">
                 <h3 style="color: #065f46; margin-bottom: 1rem; border-bottom: 2px solid #269C26; padding-bottom: 0.5rem;">Order Details</h3>

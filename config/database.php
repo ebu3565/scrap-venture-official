@@ -2,8 +2,8 @@
 class Database {
     private $host = "localhost";
     private $db_name = "scrap_venture";
-    private $username = "your_username";
-    private $password = "your_password";
+    private $username = "root";
+    private $password = "";
     public $conn;
 
     public function getConnection() {
