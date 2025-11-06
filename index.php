@@ -1521,6 +1521,46 @@
 .success-bounce {
     animation: bounce 1s;
 }
+
+
+/* Validation Error Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+.validation-error {
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* Add red border to invalid fields */
+.form-input:invalid,
+.phone-input:has(.phone-field:invalid) {
+    border-color: #ef4444;
+}
+
+.material-options:not(:has(.selected)) {
+    border: 2px solid #ef4444;
+    border-radius: 8px;
+    padding: 0.5rem;
+}
     </style>
 </head>
 <body>
@@ -1560,7 +1600,7 @@
                     <input type="tel" id="mobile" class="phone-field" placeholder="1XXXXXXXXX" pattern="[0-9]{10}" required>
                 </div>
             </div>
-            <button type="button" class="next-btn" onclick="showStep(2)">Next</button>
+           <button type="button" class="next-btn" onclick="validateStep1()">Next</button>
         </div>
 
         <!-- Step 2: Material Selection -->
@@ -1589,7 +1629,7 @@
             </div>
             <div class="form-navigation">
                 <button type="button" class="back-btn" onclick="showStep(1)">Back</button>
-                <button type="button" class="next-btn" onclick="showStep(3)">Next</button>
+               <button type="button" class="next-btn" onclick="validateStep2()">Next</button>
             </div>
         </div>
 
@@ -1621,7 +1661,7 @@
             
             <div class="form-navigation">
                 <button type="button" class="back-btn" onclick="showStep(2)">Back</button>
-               <button type="button" class="confirm-btn" onclick="showStep(4)">Confirm Pickup</button>
+               <button type="button" class="confirm-btn" onclick="validateStep3()">Confirm Pickup</button>
             </div>
         </div>
 
@@ -1632,17 +1672,13 @@
         <input type="date" id="pickupDate" class="form-input" min="<?php echo date('Y-m-d'); ?>" required>
     </div>
     
-    <div class="form-group">
-        <label class="form-label" for="pickupTime">Pickup Time</label>
-        <select id="pickupTime" class="form-input" required>
-            <option value="">Select a time slot</option>
-            <option value="09:00-11:00">09:00 AM - 11:00 AM</option>
-            <option value="11:00-13:00">11:00 AM - 01:00 PM</option>
-            <option value="13:00-15:00">01:00 PM - 03:00 PM</option>
-            <option value="15:00-17:00">03:00 PM - 05:00 PM</option>
-            <option value="17:00-19:00">05:00 PM - 07:00 PM</option>
-        </select>
-    </div>
+<div class="form-group">
+    <label class="form-label" for="pickupTime">Pickup Time</label>
+    <input type="time" id="pickupTime" class="form-input" min="09:00" max="19:00" required>
+    <small style="color: #6b7280; font-size: 0.8rem; margin-top: 0.25rem; display: block;">
+        Available: 9:00 AM - 7:00 PM
+    </small>
+</div>
     
     <div class="form-group">
         <label class="form-label">Pickup Location</label>
@@ -2189,6 +2225,10 @@ function getCurrentLocation() {
 function getAddressFromCoordinates(lat, lng) {
     const locationStatus = document.getElementById('locationStatus');
     
+    // Show more detailed location fetching
+    locationStatus.className = 'location-status loading';
+    locationStatus.textContent = 'Getting exact address...';
+    
     fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`)
         .then(response => response.json())
         .then(data => {
@@ -2196,12 +2236,21 @@ function getAddressFromCoordinates(lat, lng) {
             document.getElementById('userAddress').value = address;
             document.getElementById('manualAddress').value = address;
             
+            // Get more specific address components
+            const addressParts = [];
+            if (data.address.road) addressParts.push(data.address.road);
+            if (data.address.neighbourhood) addressParts.push(data.address.neighbourhood);
+            if (data.address.suburb) addressParts.push(data.address.suburb);
+            if (data.address.city) addressParts.push(data.address.city);
+            
+            const specificLocation = addressParts.length > 0 ? addressParts.join(', ') : 'Your exact location';
+            
             locationStatus.className = 'location-status success';
-            locationStatus.textContent = `Location found: ${data.address?.road || data.address?.suburb || 'Your location'}`;
+            locationStatus.textContent = `📍 ${specificLocation}`;
             
             const locationBtn = document.querySelector('.location-btn');
             locationBtn.disabled = false;
-            locationBtn.innerHTML = '<i class="fas fa-check"></i> Location Updated';
+            locationBtn.innerHTML = '<i class="fas fa-check"></i> Location Found';
             
             setTimeout(() => {
                 locationBtn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Use Current Location';
@@ -2209,8 +2258,13 @@ function getAddressFromCoordinates(lat, lng) {
         })
         .catch(error => {
             console.error('Geocoding error:', error);
+            // Fallback to coordinates if address fails
+            const coordinatesLocation = `Lat: ${lat.toFixed(6)}, Lng: ${lng.toFixed(6)}`;
+            document.getElementById('userAddress').value = coordinatesLocation;
+            document.getElementById('manualAddress').value = coordinatesLocation;
+            
             locationStatus.className = 'location-status success';
-            locationStatus.textContent = 'Location coordinates saved (unable to get address)';
+            locationStatus.textContent = `📍 Location: ${coordinatesLocation}`;
             
             const locationBtn = document.querySelector('.location-btn');
             locationBtn.disabled = false;
@@ -2237,17 +2291,17 @@ function confirmOrder() {
     
     // Validation
     if (!pickupDate) {
-        alert('Please select a pickup date.');
+        showValidationError('Please select a pickup date.');
         return;
     }
     
     if (!pickupTime) {
-        alert('Please select a pickup time slot.');
+        showValidationError('Please select a pickup time.');
         return;
     }
     
     if (!manualAddress && (!userLatitude || !userLongitude)) {
-        alert('Please provide your pickup location or use current location.');
+        showValidationError('Please provide your pickup location or use current location.');
         return;
     }
     
@@ -2266,46 +2320,112 @@ function confirmOrder() {
         } : null
     };
     
-    // Show confirmation with all details
-    const confirmationMessage = `🎉 Order Confirmed Successfully!
-
-📋 Order Details:
-• Material: ${formData.material}
-• Weight: ${formData.weight} kg
-• Photos: ${formData.photos}
-
-📅 Pickup Schedule:
-• Date: ${new Date(formData.date).toLocaleDateString()}
-• Time: ${formData.time}
-
-📍 Pickup Location:
-${formData.address}
-
-We'll contact you at ${formData.phone} before pickup.
-
-Thank you for choosing Scrap Venture! ♻️`;
-    
-    alert(confirmationMessage);
-    
     console.log('Order confirmed:', formData);
     
-    // Reset form and show success message
-    resetForm();
-    showSuccessAnimation();
+    // Show success animation directly (no alert)
+    showSuccessAnimation(formData);
 }
 
-function showSuccessAnimation() {
+function showValidationError(message) {
+    // Create a temporary error message
+    const errorDiv = document.createElement('div');
+    errorDiv.style.cssText = `
+        background: #fee2e2;
+        color: #dc2626;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        border: 1px solid #fecaca;
+        text-align: center;
+        font-weight: 600;
+    `;
+    errorDiv.textContent = message;
+    
+    const form = document.getElementById('pickupForm');
+    form.insertBefore(errorDiv, form.firstChild);
+    
+    // Remove error message after 3 seconds
+    setTimeout(() => {
+        errorDiv.remove();
+    }, 3000);
+}
+
+function showSuccessAnimation(formData) {
     const pickupSection = document.querySelector('.pickup-section');
+    
+    // Format the date for display
+    const formattedDate = new Date(formData.date).toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    
+    // Format the time for display
+    const [hours, minutes] = formData.time.split(':');
+    const formattedTime = new Date(2000, 0, 1, hours, minutes).toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    });
+    
     pickupSection.innerHTML = `
-        <div class="success-animation" style="text-align: center; padding: 3rem 2rem;">
+        <div class="success-animation" style="text-align: center; padding: 2rem;">
             <div style="font-size: 4rem; color: #269C26; margin-bottom: 1rem;">✅</div>
-            <h2 style="color: #065f46; margin-bottom: 1rem;">Order Confirmed!</h2>
-            <p style="color: #4b5563; margin-bottom: 2rem;">We've received your pickup request and will contact you shortly.</p>
-            <button onclick="location.reload()" class="next-btn" style="background: #269C26;">
+            <h2 style="color: #065f46; margin-bottom: 1.5rem; font-size: 2rem;">Order Confirmed!</h2>
+            
+            <div style="background: #f0f9f0; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; border: 2px solid #dcfce7;">
+                <h3 style="color: #065f46; margin-bottom: 1rem; border-bottom: 2px solid #269C26; padding-bottom: 0.5rem;">Order Details</h3>
+                
+                <div style="text-align: left; color: #374151;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600;">Material:</span>
+                        <span>${formData.material}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600;">Weight:</span>
+                        <span>${formData.weight} kg</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600;">Photos:</span>
+                        <span>${formData.photos}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600;">Date:</span>
+                        <span>${formattedDate}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600;">Time:</span>
+                        <span>${formattedTime}</span>
+                    </div>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #dcfce7;">
+                        <div style="font-weight: 600; margin-bottom: 0.25rem;">Pickup Location:</div>
+                        <div style="font-size: 0.9rem; color: #4b5563;">${formData.address}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="color: #4b5563; margin-bottom: 0.5rem; font-weight: 600;">
+                We'll contact you at <span style="color: #269C26;">${formData.phone}</span>
+            </p>
+            <p style="color: #6b7280; margin-bottom: 2rem; font-size: 0.9rem;">
+                Our team will call you 30 minutes before pickup
+            </p>
+            
+            <button onclick="location.reload()" class="next-btn" style="background: #269C26; margin-bottom: 1rem;">
                 Schedule Another Pickup
+            </button>
+            <br>
+            <button onclick="printOrder()" class="back-btn" style="background: #6b7280;">
+                <i class="fas fa-print"></i> Print Order Summary
             </button>
         </div>
     `;
+}
+
+// Optional: Print function
+function printOrder() {
+    window.print();
 }
 
 function resetForm() {
@@ -2433,6 +2553,113 @@ function initializeAnimations() {
             this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2Y4ZmFmYyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM2NDc0OGIiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';
         });
     });
+}
+
+
+
+// Validation functions
+function validateStep1() {
+    const phoneNumber = document.getElementById('mobile').value;
+    
+    if (!/^1[0-9]{9}$/.test(phoneNumber)) {
+        showValidationError('Please enter a valid 10-digit Bangladeshi mobile number (without country code).');
+        return;
+    }
+    
+    showStep(2);
+}
+
+function validateStep2() {
+    const material = document.getElementById('selectedMaterial').value;
+    
+    if (!material) {
+        showValidationError('Please select a material type.');
+        return;
+    }
+    
+    showStep(3);
+}
+
+function validateStep3() {
+    const weight = document.getElementById('weight').value;
+    
+    if (!weight || weight <= 0) {
+        showValidationError('Please enter a valid weight (minimum 0.1 kg).');
+        return;
+    }
+    
+    showStep(4);
+}
+
+function showValidationError(message) {
+    const existingErrors = document.querySelectorAll('.validation-error');
+    existingErrors.forEach(error => error.remove());
+    
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'validation-error';
+    errorDiv.style.cssText = `
+        background: #fee2e2;
+        color: #dc2626;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        border: 1px solid #fecaca;
+        text-align: center;
+        font-weight: 600;
+        animation: fadeIn 0.3s ease-in;
+    `;
+    errorDiv.textContent = message;
+    
+    const currentStep = document.querySelector('.form-step.active');
+    currentStep.insertBefore(errorDiv, currentStep.firstChild);
+    
+    setTimeout(() => {
+        if (errorDiv.parentNode) {
+            errorDiv.style.animation = 'fadeOut 0.3s ease-out';
+            setTimeout(() => errorDiv.remove(), 300);
+        }
+    }, 4000);
+}
+
+
+// Real-time validation for phone number
+document.getElementById('mobile').addEventListener('input', function(e) {
+    const phoneNumber = e.target.value;
+    const phoneInput = document.querySelector('.phone-input');
+    
+    if (/^1[0-9]{9}$/.test(phoneNumber)) {
+        phoneInput.style.borderColor = '#10b981';
+    } else {
+        phoneInput.style.borderColor = phoneNumber.length > 0 ? '#ef4444' : '#e5e7eb';
+    }
+});
+
+// Real-time validation for weight
+document.getElementById('weight').addEventListener('input', function(e) {
+    const weight = e.target.value;
+    const weightInput = document.getElementById('weight');
+    
+    if (weight > 0) {
+        weightInput.style.borderColor = '#10b981';
+    } else {
+        weightInput.style.borderColor = weight.length > 0 ? '#ef4444' : '#e5e7eb';
+    }
+});
+
+// Real-time validation for material selection
+function selectMaterial(material) {
+    selectedMaterial = material;
+    document.getElementById('selectedMaterial').value = material;
+    
+    // Update UI
+    document.querySelectorAll('.material-option').forEach(option => {
+        option.classList.remove('selected');
+    });
+    event.currentTarget.classList.add('selected');
+    
+    // Remove any material selection error border
+    const materialOptions = document.querySelector('.material-options');
+    materialOptions.style.border = 'none';
 }
 
 </script>
