@@ -265,10 +265,10 @@ $logo_path = 'assets/images/logo.png'; // Update this path to your actual logo
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Home</a>
+                    <a href="index.php" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Scrap Rates</a>
+                    <a href="scrap_rates.php" class="nav-link">Scrap Rates</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Why Us?</a>
