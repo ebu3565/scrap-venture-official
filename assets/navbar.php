@@ -274,7 +274,7 @@ $logo_path = 'assets/images/logo.png'; // Update this path to your actual logo
                     <a href="#" class="nav-link">Why Us?</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Contact</a>
+                    <a href="contactus.php" class="nav-link">Contact</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link login-btn">Login</a>
